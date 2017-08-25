@@ -1,3 +1,9 @@
+golang-1.9 (1.9-1ubuntu1~hnakamur1) xenial; urgency=medium
+
+  * Imported Upstream version 1.9
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Fri, 25 Aug 2017 10:01:06 +0900
+
 golang-1.9 (1.9~rc2-1ubuntu1~hnakamur1) xenial; urgency=medium
 
   * New upstream release.
