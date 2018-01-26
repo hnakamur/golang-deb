@@ -7,11 +7,6 @@ export GOVER := $(shell perl -w -mDpkg::Version -e 'Dpkg::Version->new(`dpkg-par
 export GOROOT := $(CURDIR)
 export GOROOT_FINAL := /usr/lib/go-$(GOVER)
 
-# NOTE: Set GOCACHE environment variable to avoid the following error.
-#   initializing cache in $GOCACHE: mkdir /nonexistent: permission denied
-# See https://github.com/golang/go/blob/go1.10rc1/src/cmd/go/internal/cache/default.go#L35-L55
-export GOCACHE := $(CURDIR)
-
 # NOTE: Set HOME to a writable directory to avoid the following test error when
 # we build golang in pbuilder.
 #    --- FAIL: TestHttpsInsecure (10.03s)
