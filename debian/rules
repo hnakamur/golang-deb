@@ -7,6 +7,15 @@ export GOVER := $(shell perl -w -mDpkg::Version -e 'Dpkg::Version->new(`dpkg-par
 export GOROOT := $(CURDIR)
 export GOROOT_FINAL := /usr/lib/go-$(GOVER)
 
+# NOTE: Set GOCACHE environment variable to avoid the following error.
+#   initializing cache in $GOCACHE: mkdir /nonexistent: permission denied
+# See https://github.com/golang/go/blob/go1.10rc1/src/cmd/go/internal/cache/default.go#L35-L55
+export GOCACHE := $(CURDIR)
+
+# NOTE: Set container environment variable to skip tests which fail in pbuilder chroot.
+# See https://github.com/golang/go/blob/go1.10rc1/src/syscall/exec_linux_test.go#L26-L42
+export container = lxc
+
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH 2>/dev/null)
 RUN_TESTS := true
 # armel: ???
