@@ -22,6 +22,14 @@ shlib_archs = $(shell GOVER=$(GOVER) perl debian/helpers/getshlibarches.pl)
 
 multiarch := $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
+# NOTE: We need $HOME to be writable in order to run builds
+# and tests successfully.
+# pbuilder sets $HOME to /nonexistent and make it non-writable.
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=441052
+ifneq (0,$(shell test -w "$(HOME)"; echo $$?))
+        export HOME := /tmp
+endif
+
 %:
 	+dh --parallel $(opt_no_act) $@
 
