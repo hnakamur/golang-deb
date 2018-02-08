@@ -302,7 +302,7 @@ func (ctxt *Link) pclntab() {
 		off = int32(ftab.SetAddr(ctxt.Arch, int64(off), s))
 
 		// name int32
-		nameoff := nameToOffset(s.Name)
+		nameoff := nameToOffset(applyBuildPathPrefixMap(s.Name))
 		off = int32(ftab.SetUint32(ctxt.Arch, int64(off), uint32(nameoff)))
 
 		// args int32
@@ -449,7 +449,7 @@ func (ctxt *Link) pclntab() {
 	ftab.SetUint32(ctxt.Arch, int64(start), uint32(len(ctxt.Filesyms)+1))
 	for i := len(ctxt.Filesyms) - 1; i >= 0; i-- {
 		s := ctxt.Filesyms[i]
-		ftab.SetUint32(ctxt.Arch, int64(start)+s.Value*4, uint32(ftabaddstring(ctxt, ftab, s.Name)))
+		ftab.SetUint32(ctxt.Arch, int64(start)+s.Value*4, uint32(ftabaddstring(ctxt, ftab, applyBuildPathPrefixMap(s.Name))))
 	}
 
 	ftab.Size = int64(len(ftab.P))

@@ -1173,7 +1173,7 @@ func writelines(ctxt *Link, unit *compilationUnit, ls *sym.Symbol) {
 			}
 			// File indexes are 1-based.
 			fileNums[int(f.Value)] = len(fileNums) + 1
-			Addstring(ls, f.Name)
+			Addstring(ls, applyBuildPathPrefixMap(f.Name))
 			ls.AddUint8(0)
 			ls.AddUint8(0)
 			ls.AddUint8(0)
@@ -1752,7 +1752,7 @@ func dwarfGenerateDebugInfo(ctxt *Link) {
 		unit.dwinfo = newdie(ctxt, &dwroot, dwarf.DW_ABRV_COMPUNIT, unit.lib.Pkg, 0)
 		newattr(unit.dwinfo, dwarf.DW_AT_language, dwarf.DW_CLS_CONSTANT, int64(dwarf.DW_LANG_Go), 0)
 		// OS X linker requires compilation dir or absolute path in comp unit name to output debug info.
-		compDir := getCompilationDir()
+		compDir := applyBuildPathPrefixMap(getCompilationDir())
 		// TODO: Make this be the actual compilation directory, not
 		// the linker directory. If we move CU construction into the
 		// compiler, this should happen naturally.
