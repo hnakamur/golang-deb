@@ -1,3 +1,9 @@
+golang-1.10 (1.10-1ubuntu1~hnakamur1) xenial; urgency=medium
+
+  * Imported Upstream version 1.10
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 17 Feb 2018 08:18:54 +0900
+
 golang-1.10 (1.10~rc2-1ubuntu1~hnakamur1) xenial; urgency=medium
 
   * Imported Upstream version 1.10rc2
