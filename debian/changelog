@@ -1,3 +1,10 @@
+golang-1.10 (1.10.3-1ubuntu1ppa2~ubuntu18.04.1) bionic; urgency=medium
+
+  * Copy most debian files from official golang-1.10-1.10.1 package
+  * Delete the patch which is included in the go1.10.3
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Mon, 11 Jun 2018 17:11:57 +0900
+
 golang-1.10 (1.10.3-1ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
 
   * New upstream version 1.10.3
