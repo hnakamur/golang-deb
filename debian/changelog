@@ -1,3 +1,10 @@
+golang-1.11 (1.11-1ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
+
+  * Modify gbp.conf for go1.11
+  * New upstream version 1.11
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 25 Aug 2018 18:14:46 +0900
+
 golang-1.10 (1.10.3-1ubuntu1ppa2~ubuntu18.04.1) bionic; urgency=medium
 
   * Copy most debian files from official golang-1.10-1.10.1 package
