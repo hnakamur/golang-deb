@@ -1,3 +1,12 @@
+golang-1.11 (1.11.2-1ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
+
+  * Modify files for go1.11
+  * Do nothing for dh_strip_nondeterminism
+  * New upstream version 1.11.2
+  * Update debian patch
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 04 Nov 2018 00:36:48 +0900
+
 golang-1.11 (1.11-1ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
 
   * Modify gbp.conf for go1.11
