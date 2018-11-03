@@ -466,7 +466,10 @@ func (gcToolchain) ld(b *Builder, root *Action, out, importcfg, mainpkg string) 
 		dir, out = filepath.Split(out)
 	}
 
-	return b.run(root, dir, root.Package.ImportPath, nil, cfg.BuildToolexec, base.Tool("link"), "-o", out, "-importcfg", importcfg, ldflags, mainpkg)
+	// Apply the rewrite of $WORK to /tmp/go-build also to DWARF file tables:
+	env := []string{"BUILD_PATH_PREFIX_MAP=/tmp/go-build=" + b.WorkDir + ":" + os.Getenv("BUILD_PATH_PREFIX_MAP")}
+
+	return b.run(root, dir, root.Package.ImportPath, env, cfg.BuildToolexec, base.Tool("link"), "-o", out, "-importcfg", importcfg, ldflags, mainpkg)
 }
 
 func (gcToolchain) ldShared(b *Builder, root *Action, toplevelactions []*Action, out, importcfg string, allactions []*Action) error {
