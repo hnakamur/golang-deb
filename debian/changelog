@@ -1,3 +1,9 @@
+golang-1.11 (1.11.4-1ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
+
+  * New upstream version 1.11.4
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 29 Dec 2018 21:57:46 +0900
+
 golang-1.11 (1.11.2-1ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
 
   * Modify files for go1.11
