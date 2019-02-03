@@ -210,9 +210,8 @@ func (curve *CurveParams) doubleJacobian(x, y, z *big.Int) (*big.Int, *big.Int, 
 
 	x3 := new(big.Int).Mul(alpha, alpha)
 	beta8 := new(big.Int).Lsh(beta, 3)
-	beta8.Mod(beta8, curve.P)
 	x3.Sub(x3, beta8)
-	if x3.Sign() == -1 {
+	for x3.Sign() == -1 {
 		x3.Add(x3, curve.P)
 	}
 	x3.Mod(x3, curve.P)
