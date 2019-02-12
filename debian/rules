@@ -6,6 +6,7 @@ export GOVER := $(shell perl -w -mDpkg::Version -e 'Dpkg::Version->new(`dpkg-par
 
 export GOROOT := $(CURDIR)
 export GOROOT_FINAL := /usr/lib/go-$(GOVER)
+export GOCACHE := $(CURDIR)/.cache
 
 # We need DEB_HOST_ARCH, so include the needed makefile snippet
 include /usr/share/dpkg/architecture.mk
@@ -75,7 +76,7 @@ else
 	# skip the tests on platforms where they fail
 endif
 	# Remove GOCACHE files
-	rm -rf pkg/obj
+	rm -rf pkg/obj $(GOCACHE)
 
 override_dh_compress-indep:
 	dh_compress -Xusr/share/doc/golang-$(GOVER)-doc/html -Xusr/share/doc/golang-$(GOVER)-doc/favicon.ico
