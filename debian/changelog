@@ -1,3 +1,9 @@
+golang-1.12 (1.12~rc1-1ubuntu1ppa2~ubuntu18.04.1) bionic; urgency=medium
+
+  * Set GOCACHE environment explicitly for build on PPA
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Tue, 12 Feb 2019 17:47:06 +0900
+
 golang-1.12 (1.12~rc1-1ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
 
   * New upstream version 1.12~rc1
