@@ -1,3 +1,9 @@
+golang-1.12 (1.12~rc1-1ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
+
+  * New upstream version 1.12~rc1
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Tue, 12 Feb 2019 16:52:54 +0900
+
 golang-1.12 (1.12~beta2-2ubuntu1ppa1~ubuntu18.04.1) bionic; urgency=medium
 
   * Backport to Ubuntu 18.04 LTS 
