@@ -61,7 +61,7 @@ ifeq (true, $(RUN_TESTS))
 		cd src; \
 		export PATH="$(GOROOT)/bin:$$PATH"; \
 		eval "$$(go tool dist env)"; \
-		bash run.bash -k -no-rebuild;
+		bash run.bash -v -k -no-rebuild;
 	# -k           keep going even when error occurred
 	# -no-rebuild  don't rebuild std and cmd packages
 
