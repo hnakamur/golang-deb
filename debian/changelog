@@ -1,3 +1,9 @@
+golang-1.12 (1.12.3-1ubuntu1ppa1~18.04.1) bionic; urgency=medium
+
+  * New upstream version 1.12.3
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Tue, 09 Apr 2019 08:58:45 +0900
+
 golang-1.12 (1.12.2-1ubuntu1ppa2~18.04.1) bionic; urgency=medium
 
   * Make test verbose
