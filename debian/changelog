@@ -1,3 +1,9 @@
+golang-1.12 (1.12.8-1ppa1~bionic) bionic; urgency=medium
+
+  * New upstream version 1.12.8
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Wed, 14 Aug 2019 16:15:18 +0900
+
 golang-1.12 (1.12.7-1ppa1~bionic) bionic; urgency=medium
 
   * New upstream version 1.12.7
