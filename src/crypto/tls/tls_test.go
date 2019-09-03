@@ -23,17 +23,6 @@ import (
 	"time"
 )
 
-var savedSupportedSignatureAlgorithmsTLS12 = supportedSignatureAlgorithmsTLS12
-
-func init() {
-	// TLS 1.3 is opt-in for Go 1.12, and RSA-PSS is disabled in TLS 1.2, but we
-	// want to run most tests with both enabled. TestTLS13Switch below and the
-	// "PSS-Disabled" recordings test the disabled behavior. See Issue 30055.
-	tls13Support.Do(func() {}) // defuse the sync.Once
-	tls13Support.cached = true
-	supportedSignatureAlgorithmsTLS12 = supportedSignatureAlgorithms
-}
-
 var rsaCertPEM = `-----BEGIN CERTIFICATE-----
 MIIB0zCCAX2gAwIBAgIJAI/M7BYjwB+uMA0GCSqGSIb3DQEBBQUAMEUxCzAJBgNV
 BAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBX
@@ -48,7 +37,7 @@ r5QuVbpQhH6u+0UgcW0jp9QwpxoPTLTWGXEWBBBurxFwiCBhkQ+V
 -----END CERTIFICATE-----
 `
 
-var rsaKeyPEM = `-----BEGIN RSA PRIVATE KEY-----
+var rsaKeyPEM = testingKey(`-----BEGIN RSA TESTING KEY-----
 MIIBOwIBAAJBANLJhPHhITqQbPklG3ibCVxwGMRfp/v4XqhfdQHdcVfHap6NQ5Wo
 k/4xIA+ui35/MmNartNuC+BdZ1tMuVCPFZcCAwEAAQJAEJ2N+zsR0Xn8/Q6twa4G
 6OB1M1WO+k+ztnX/1SvNeWu8D6GImtupLTYgjZcHufykj09jiHmjHx8u8ZZB/o1N
@@ -56,12 +45,12 @@ MQIhAPW+eyZo7ay3lMz1V01WVjNKK9QSn1MJlb06h/LuYv9FAiEA25WPedKgVyCW
 SmUwbPw8fnTcpqDWE3yTO3vKcebqMSsCIBF3UmVue8YU3jybC3NxuXq3wNm34R8T
 xVLHwDXh/6NJAiEAl2oHGGLz64BuAfjKrqwz7qMYr9HCLIe/YsoWq/olzScCIQDi
 D2lWusoe2/nEqfDVVWGWlyJ7yOmqaVm/iNUN9B2N2g==
------END RSA PRIVATE KEY-----
-`
+-----END RSA TESTING KEY-----
+`)
 
 // keyPEM is the same as rsaKeyPEM, but declares itself as just
 // "PRIVATE KEY", not "RSA PRIVATE KEY".  https://golang.org/issue/4477
-var keyPEM = `-----BEGIN PRIVATE KEY-----
+var keyPEM = testingKey(`-----BEGIN TESTING KEY-----
 MIIBOwIBAAJBANLJhPHhITqQbPklG3ibCVxwGMRfp/v4XqhfdQHdcVfHap6NQ5Wo
 k/4xIA+ui35/MmNartNuC+BdZ1tMuVCPFZcCAwEAAQJAEJ2N+zsR0Xn8/Q6twa4G
 6OB1M1WO+k+ztnX/1SvNeWu8D6GImtupLTYgjZcHufykj09jiHmjHx8u8ZZB/o1N
@@ -69,8 +58,8 @@ MQIhAPW+eyZo7ay3lMz1V01WVjNKK9QSn1MJlb06h/LuYv9FAiEA25WPedKgVyCW
 SmUwbPw8fnTcpqDWE3yTO3vKcebqMSsCIBF3UmVue8YU3jybC3NxuXq3wNm34R8T
 xVLHwDXh/6NJAiEAl2oHGGLz64BuAfjKrqwz7qMYr9HCLIe/YsoWq/olzScCIQDi
 D2lWusoe2/nEqfDVVWGWlyJ7yOmqaVm/iNUN9B2N2g==
------END PRIVATE KEY-----
-`
+-----END TESTING KEY-----
+`)
 
 var ecdsaCertPEM = `-----BEGIN CERTIFICATE-----
 MIIB/jCCAWICCQDscdUxw16XFDAJBgcqhkjOPQQBMEUxCzAJBgNVBAYTAkFVMRMw
@@ -87,17 +76,17 @@ H5jBImIxPL4WxQNiBTexAkF8D1EtpYuWdlVQ80/h/f4pBcGiXPqX5h2PQSQY7hP1
 -----END CERTIFICATE-----
 `
 
-var ecdsaKeyPEM = `-----BEGIN EC PARAMETERS-----
+var ecdsaKeyPEM = testingKey(`-----BEGIN EC PARAMETERS-----
 BgUrgQQAIw==
 -----END EC PARAMETERS-----
------BEGIN EC PRIVATE KEY-----
+-----BEGIN EC TESTING KEY-----
 MIHcAgEBBEIBrsoKp0oqcv6/JovJJDoDVSGWdirrkgCWxrprGlzB9o0X8fV675X0
 NwuBenXFfeZvVcwluO7/Q9wkYoPd/t3jGImgBwYFK4EEACOhgYkDgYYABAFj36bL
 06h5JRGUNB1X/Hwuw64uKW2GGJLVPPhoYMcg/ALWaW+d/t+DmV5xikwKssuFq4Bz
 VQldyCXTXGgu7OC0AQCC/Y/+ODK3NFKlRi+AsG3VQDSV4tgHLqZBBus0S6pPcg1q
 kohxS/xfFg/TEwRSSws+roJr4JFKpO2t3/be5OdqmQ==
------END EC PRIVATE KEY-----
-`
+-----END EC TESTING KEY-----
+`)
 
 var keyPairTests = []struct {
 	algo string
@@ -1109,3 +1098,5 @@ func TestBuildNameToCertificate_doesntModifyCertificates(t *testing.T) {
 		t.Fatalf("Certificates were mutated by BuildNameToCertificate\nGot: %#v\nWant: %#v\n", got, want)
 	}
 }
+
+func testingKey(s string) string { return strings.ReplaceAll(s, "TESTING KEY", "PRIVATE KEY") }
