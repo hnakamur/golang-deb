@@ -1,3 +1,10 @@
+golang-1.13 (1.13-1ppa1~bionic) bionic; urgency=medium
+
+  * Modify debian/* files for go1.13
+  * New upstream version 1.13
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Wed, 04 Sep 2019 08:35:05 +0900
+
 golang-1.12 (1.12.9-1ppa1~bionic) bionic; urgency=medium
 
   * New upstream version 1.12.9
