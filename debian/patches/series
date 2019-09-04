@@ -1,1 +1,2 @@
 0002-Fix-Lintian-warnings-about-wrong-interpreter-path.patch
+skip_tests_on_schroot.patch

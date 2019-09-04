@@ -1,0 +1,33 @@
+--- a/src/os/os_test.go
++++ b/src/os/os_test.go
+@@ -12,6 +12,7 @@
+ 	"internal/testenv"
+ 	"io"
+ 	"io/ioutil"
++	"os"
+ 	. "os"
+ 	osexec "os/exec"
+ 	"path/filepath"
+@@ -2338,6 +2339,10 @@
+ }
+ 
+ func TestUserHomeDir(t *testing.T) {
++	if os.Getenv("SCHROOT_CHROOT_NAME") != "" {
++		t.Skip("skipping test on schroot")
++	}
++
+ 	dir, err := UserHomeDir()
+ 	if dir == "" && err == nil {
+ 		t.Fatal("UserHomeDir returned an empty string but no error")
+--- a/src/syscall/exec_linux_test.go
++++ b/src/syscall/exec_linux_test.go
+@@ -573,6 +573,9 @@
+ }
+ 
+ func TestAmbientCapsUserns(t *testing.T) {
++	if os.Getenv("SCHROOT_CHROOT_NAME") != "" {
++		t.Skip("skipping test on schroot")
++	}
+ 	testAmbientCaps(t, true)
+ }
+ 
